@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+set -eo pipefail
+
+ASDF_INSTALL_TYPE=${ASDF_INSTALL_TYPE:-version  }
+
+test -n "$ASDF_INSTALL_VERSION" || {
+	echo 'Missing ASDF_INSTALL_VERSION'
+	exit 1
+}
+
+test -n "$ASDF_INSTALL_PATH" || {
+	echo 'Missing ASDF_INSTALL_PATH'
+	exit 1
+}
+
+_get_arch() {
+	uname | tr '[:upper:]' '[:lower:]'
+}
+
+_get_download_url() {
+	local version="$1"
+	local platform="$2"
+
+	echo "https://github.com/mvdan/sh/releases/download/${version}/shfmt_${version}_${platform}_amd64"
+}
+
+install() {
+	local -r install_type=$1
+	local -r version=$2
+	local -r install_path=$3
+	local -r bin_install_path="$install_path/bin"
+	local -r platform="$(_get_arch)"
+	local -r download_url="$(_get_download_url "$version" "$platform")"
+	local -r bin_path="$bin_install_path/shfmt"
+
+	mkdir -p "$bin_install_path"
+	echo "Downloading shfmt from $download_url"
+	curl -s "$download_url" -o "$bin_path"
+	chmod +x "$bin_path"
+}
+
+install "$ASDF_INSTALL_TYPE" "$ASDF_INSTALL_VERSION" "$ASDF_INSTALL_PATH"
