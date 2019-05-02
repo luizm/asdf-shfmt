@@ -2,8 +2,8 @@
 
 releases_url="https://api.github.com/repos/mvdan/sh/releases"
 
-if [ -n "$GITHUB_API_TOKEN" ]; then
-	cmd="curl -s -H 'Authorization: token $GITHUB_API_TOKEN'"
+if [ -n "$OAUTH_TOKEN" ]; then
+	cmd="curl -s -H 'Authorization: token $OAUTH_TOKEN'"
 else
 	cmd="curl -s $releases_url"
 fi
