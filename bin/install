@@ -21,7 +21,7 @@ _get_download_url() {
 	local version="$1"
 	local platform="$2"
 
-	echo "https://github.com/mvdan/sh/releases/download/${version}/shfmt_${version}_${platform}_amd64"
+	echo "https://github.com/mvdan/sh/releases/download/v${version}/shfmt_v${version}_${platform}_amd64"
 }
 
 install() {
