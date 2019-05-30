@@ -18,8 +18,8 @@ _get_arch() {
 }
 
 _get_download_url() {
-	local version="$1"
-	local platform="$2"
+	local -r version="$1"
+	local -r platform="$2"
 
 	echo "https://github.com/mvdan/sh/releases/download/v${version}/shfmt_v${version}_${platform}_amd64"
 }
