@@ -1,5 +1,5 @@
 language: c
-script: asdf plugin-test shfmt https://github.com/luizm/asdf-shfmt.git
+script: asdf plugin-test shfmt https://github.com/luizm/asdf-shfmt.git 'shfmt --version'
 before_script:
   - git clone https://github.com/asdf-vm/asdf.git
   - source asdf/asdf.sh
