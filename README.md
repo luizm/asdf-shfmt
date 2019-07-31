@@ -7,7 +7,7 @@
 ## Install
 
 ```
-asdf plugin-add shfmt https://github.com/luizm/asdf-shfmt.git
+asdf plugin-add shfmt
 ```
 
 ## Use
