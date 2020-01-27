@@ -16,4 +16,4 @@ sort_versions() {
 eval "$cmd" |
 	grep -oE "tag_name\": *\".{1,15}\"," |
 	sed 's/tag_name\": *\"v//;s/\",//' |
-	sort_versions
+	sort_versions | tr "\n" " "
