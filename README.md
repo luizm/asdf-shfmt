@@ -4,12 +4,17 @@
 
 [shfmt](https://github.com/mvdan/sh) plugin for the [asdf](https://github.com/asdf-vm/asdf) version manager.
 
-## Install
+For more informations about the [asdf usage](https://asdf-vm.com/#/core-commands).
+
+
+## Add plugin
 
 ```
 asdf plugin-add shfmt
 ```
 
-## Use
+## Install 
 
-Check out the [asdf](https://github.com/asdf-vm/asdf) readme for instructions.
+```
+asdf install shfmt 3.0.2
+```
