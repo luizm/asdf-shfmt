@@ -12,12 +12,17 @@ on:
 
 jobs:
   plugin_test:
+    continue-on-error: ${{ matrix.experimental }}
     strategy:
       fail-fast: false
       matrix:
         os:
           - macos-latest
           - ubuntu-latest
+        experimental: [false]
+        include:
+          - os: macos-latest
+          - experimental: true
 
     runs-on: ${{ matrix.os }}
 
