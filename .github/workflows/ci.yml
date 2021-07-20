@@ -1,4 +1,4 @@
-name: CI
+name: Build
 
 on:
   pull_request:
@@ -7,11 +7,11 @@ on:
   push:
     paths-ignore:
       - "**.md"
-  schedule:
-    - cron: 0 0 * * 5
+    branches:
+      - master
 
 jobs:
-  plugin_test:
+  plugin-test:
     continue-on-error: ${{ matrix.experimental }}
     runs-on: ${{ matrix.os }}
     strategy:
@@ -28,26 +28,13 @@ jobs:
         uses: asdf-vm/actions/plugin-test@v1
         with:
           command: "shfmt --version"
+        env:
+          GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  lint:
+  sh-checker:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Run ShellCheck
-        run: shellcheck bin/*
-
-  format:
-    runs-on: macos-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Install shfmt
-        run: brew install shfmt
-
-      - name: Run shfmt
-        run: shfmt -d -ci -s -i 2 -bn .
+      - uses: actions/checkout@v1
+      - name: Run the sh-checker
+        uses: luizm/action-sh-checker@master
