@@ -6,44 +6,44 @@ ASDF_INSTALL_TYPE=${ASDF_INSTALL_TYPE:-version  }
 [ -n "$ASDF_INSTALL_VERSION" ] || (echo >&2 'Missing ASDF_INSTALL_VERSION' && exit 1)
 
 _get_arch() {
-	local arch
-	arch=$(uname -m)
-	case $arch in
-	armv*) arch="arm" ;;
-	aarch64) arch="arm64" ;;
-	x86) arch="386" ;;
-	x86_64) arch="amd64" ;;
-	i686) arch="386" ;;
-	i386) arch="386" ;;
-	esac
-	echo "$arch"
+  local arch
+  arch=$(uname -m)
+  case $arch in
+    armv*) arch="arm" ;;
+    aarch64) arch="arm64" ;;
+    x86) arch="386" ;;
+    x86_64) arch="amd64" ;;
+    i686) arch="386" ;;
+    i386) arch="386" ;;
+  esac
+  echo "$arch"
 }
 
 _get_platform() {
-	uname | tr '[:upper:]' '[:lower:]'
+  uname | tr '[:upper:]' '[:lower:]'
 }
 
 _get_download_url() {
-	local -r version="$1"
-	local -r platform="$2"
-	local -r arch="$3"
+  local -r version="$1"
+  local -r platform="$2"
+  local -r arch="$3"
 
-	echo "https://github.com/mvdan/sh/releases/download/v${version}/shfmt_v${version}_${platform}_${arch}"
+  echo "https://github.com/mvdan/sh/releases/download/v${version}/shfmt_v${version}_${platform}_${arch}"
 }
 
 install() {
-	local -r version="$1"
-	local -r install_path="$2"
-	local -r bin_install_path="$install_path/bin"
-	local -r platform="$(_get_platform)"
-	local -r arch="$(_get_arch)"
-	local -r download_url="$(_get_download_url "$version" "$platform" "$arch")"
-	local -r bin_path="$bin_install_path/shfmt"
+  local -r version="$1"
+  local -r install_path="$2"
+  local -r bin_install_path="$install_path/bin"
+  local -r platform="$(_get_platform)"
+  local -r arch="$(_get_arch)"
+  local -r download_url="$(_get_download_url "$version" "$platform" "$arch")"
+  local -r bin_path="$bin_install_path/shfmt"
 
-	mkdir -p "$bin_install_path"
-	echo "Downloading shfmt from $download_url"
-	curl -Ls "$download_url" -o "$bin_path"
-	chmod +x "$bin_path"
+  mkdir -p "$bin_install_path"
+  echo "Downloading shfmt from $download_url"
+  curl -Ls "$download_url" -o "$bin_path"
+  chmod +x "$bin_path"
 }
 
 install "$ASDF_INSTALL_VERSION" "$ASDF_INSTALL_PATH"
