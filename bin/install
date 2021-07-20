@@ -6,7 +6,8 @@ ASDF_INSTALL_TYPE=${ASDF_INSTALL_TYPE:-version}
 [ -n "$ASDF_INSTALL_VERSION" ] || (echo >&2 'Missing ASDF_INSTALL_VERSION' && exit 1)
 
 _get_arch() {
-	local -r arch=$(uname -m)
+	local arch
+	arch="$(uname -m)"
 	case $arch in
 	armv*) arch="arm" ;;
 	aarch64) arch="arm64" ;;
