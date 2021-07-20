@@ -39,7 +39,6 @@ _get_download_url() {
 }
 
 install() {
-	# local -r install_type=$1 #unused variable
 	local -r version=$2
 	local -r install_path=$3
 	local -r bin_install_path="$install_path/bin"
@@ -54,4 +53,4 @@ install() {
 	chmod +x "$bin_path"
 }
 
-install "$ASDF_INSTALL_TYPE" "$ASDF_INSTALL_VERSION" "$ASDF_INSTALL_PATH"
+install "$ASDF_INSTALL_VERSION" "$ASDF_INSTALL_PATH"
