@@ -3,9 +3,9 @@
 releases_url="https://api.github.com/repos/mvdan/sh/releases"
 
 if [ -n "$GITHUB_API_TOKEN" ]; then
-	cmd="curl -s -H 'Authorization: token $GITHUB_API_TOKEN' $releases_url"
+	cmd="curl --retry 10 --retry-delay 2-s -H 'Authorization: token $GITHUB_API_TOKEN' $releases_url"
 else
-	cmd="curl -s $releases_url"
+	cmd="curl --retry 10 --retry-delay 2-s $releases_url"
 fi
 
 sort_versions() {

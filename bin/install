@@ -42,7 +42,7 @@ install() {
 
 	mkdir -p "$bin_install_path"
 	echo "Downloading shfmt from $download_url"
-	curl -Ls "$download_url" -o "$bin_path"
+	curl --retry 10 --retry-delay 2 -Ls "$download_url" -o "$bin_path"
 	chmod +x "$bin_path"
 }
 
